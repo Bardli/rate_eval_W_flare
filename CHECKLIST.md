@@ -1,99 +1,99 @@
-# ✅ 项目重组完成清单
+# ✅ Project Reorganization Checklist
 
-## 目录结构
+## Directory Structure
 
-- [x] 创建 `split_jsons/` 目录
-- [x] 复制所有 split JSON 文件到 `split_jsons/`
-- [x] 创建 `output/` 目录
-- [x] 创建各疾病子目录（ascites, atherosclerosis, colorectal_cancer, lymphadenopathy）
-- [x] 移动处理结果到 `output/` 各子目录
+- [x] Create `split_jsons/` directory
+- [x] Copy all split JSON files to `split_jsons/`
+- [x] Create `output/` directory
+- [x] Create subdirectories for each disease (ascites, atherosclerosis, colorectal_cancer, lymphadenopathy)
+- [x] Move processing results into the `output/` subdirectories
 
-## 脚本更新
+## Script Updates
 
-- [x] 更新 `make_split_json.py` 默认路径
+- [x] Update default paths in `make_split_json.py`
   - [x] `default_split_json` → `split_jsons/splits_final_ascites.json`
   - [x] `default_output_dir` → `output/`
 
-- [x] 更新 `process_diseases.sh` 路径配置
+- [x] Update path configuration in `process_diseases.sh`
   - [x] `SPLIT_JSON_DIR` → `split_jsons`
   - [x] `OUTPUT_BASE_DIR` → `output`
 
-## 文件验证
+## File Verification
 
-- [x] split_jsons/ 包含 4 个 split JSON 文件
+- [x] split_jsons/ contains 4 split JSON files
   - [x] splits_final_ascites.json (158K)
   - [x] splits_final_atherosclerosis.json (158K)
   - [x] splits_final_colorectal_cancer.json (156K)
   - [x] splits_final_lymphadenopathy.json (158K)
 
-- [x] output/ 包含 4 个疾病目录
+- [x] output/ contains 4 disease directories
   - [x] output/ascites/ (312K, 4 files)
   - [x] output/atherosclerosis/ (312K, 4 files)
   - [x] output/colorectal_cancer/ (304K, 4 files)
   - [x] output/lymphadenopathy/ (312K, 4 files)
 
-- [x] 每个疾病目录包含必要的 4 个文件
+- [x] Each disease directory contains the required 4 files
   - [x] train.json
   - [x] valid.json
   - [x] test.json
   - [x] manifest.csv
 
-## 脚本功能测试
+## Script Functional Tests
 
 - [x] `make_split_json.py --help` ✓
 - [x] `make_split_json.py --split-json split_jsons/splits_final_ascites.json` ✓
-- [x] `process_diseases.sh` (批量处理) ✓
-- [x] 相对路径工作正常 ✓
+- [x] `process_diseases.sh` (batch processing) ✓
+- [x] Relative paths work correctly ✓
 
-## 文档创建
+## Documentation Created
 
-- [x] DIRECTORY_GUIDE.md - 项目总览和使用指南
-- [x] USAGE.md - 详细的命令行参数说明
-- [x] ORGANIZATION.md - 目录重组总结
-- [x] PROCESSING_SUMMARY.md - 处理过程细节（既有）
-- [x] CHECKLIST.md - 完成清单（本文件）
+- [x] DIRECTORY_GUIDE.md - Project overview and usage guide
+- [x] USAGE.md - Detailed command-line argument documentation
+- [x] ORGANIZATION.md - Directory reorganization summary
+- [x] PROCESSING_SUMMARY.md - Processing details (pre-existing)
+- [x] CHECKLIST.md - Completion checklist (this file)
 
-## 数据完整性
+## Data Integrity
 
-- [x] 所有 4 个疾病的数据都已处理
-  - [x] ascites: 1175 样本
-  - [x] atherosclerosis: 1159 样本
-  - [x] colorectal_cancer: 1159 样本
-  - [x] lymphadenopathy: 1179 样本
+- [x] All 4 diseases' data have been processed
+  - [x] ascites: 1175 samples
+  - [x] atherosclerosis: 1159 samples
+  - [x] colorectal_cancer: 1159 samples
+  - [x] lymphadenopathy: 1179 samples
 
-- [x] manifest.csv 文件都已生成
-  - [x] ascites: 1176 行（包括头）
-  - [x] atherosclerosis: 1176 行
-  - [x] colorectal_cancer: 1160 行
-  - [x] lymphadenopathy: 1180 行
+- [x] manifest.csv files generated for each
+  - [x] ascites: 1176 rows (including header)
+  - [x] atherosclerosis: 1176 rows
+  - [x] colorectal_cancer: 1160 rows
+  - [x] lymphadenopathy: 1180 rows
 
-## 代码质量
+## Code Quality
 
-- [x] Python 脚本执行无错误
-- [x] Bash 脚本执行无错误
-- [x] 路径配置正确
-- [x] 输出文件格式正确
-  - [x] JSON 文件有效
-  - [x] CSV 文件有效
-  - [x] JSONL 文件格式正确
+- [x] Python script runs without errors
+- [x] Bash script runs without errors
+- [x] Path configuration is correct
+- [x] Output file formats are correct
+  - [x] Valid JSON files
+  - [x] Valid CSV files
+  - [x] Correct JSONL file format
 
-## 文档完整性
+## Documentation Completeness
 
-- [x] 快速开始指南
-- [x] 命令行参数文档
-- [x] 使用示例
-- [x] 故障排除指南
-- [x] 目录结构说明
-- [x] 数据统计信息
+- [x] Quick-start guide
+- [x] Command-line argument documentation
+- [x] Usage examples
+- [x] Troubleshooting guide
+- [x] Directory structure description
+- [x] Data statistics
 
-## 向后兼容性
+## Backward Compatibility
 
-- [x] 旧脚本可以删除（已集成到新脚本）
-- [x] 现有代码无需修改（使用相对路径）
-- [x] 新用户可以快速理解结构（文档完整）
+- [x] Old scripts can be deleted (integrated into the new scripts)
+- [x] Existing code does not need modification (relative paths are used)
+- [x] New users can quickly understand the structure (documentation is complete)
 
 ---
 
-**重组完成时间**: 2025-12-09
-**验证状态**: ✅ 全部完成
-**是否可用**: ✅ 可用
+**Reorganization completed on**: 2025-12-09
+**Verification status**: ✅ Fully complete
+**Ready to use**: ✅ Yes

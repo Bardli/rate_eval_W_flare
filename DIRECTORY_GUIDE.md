@@ -1,231 +1,231 @@
-# Rate-evals 数据集处理工具
+# Rate-evals Dataset Processing Tool
 
-## 📁 目录结构概览
+## 📁 Directory Structure Overview
 
 ```
 rate-evals/
-├── split_jsons/                        # 📥 输入 & 🐍 脚本 & 📤 输出
-│   ├── splits_final_ascites.json       # Split JSON 文件
+├── split_jsons/                        # 📥 Inputs & 🐍 Scripts & 📤 Outputs
+│   ├── splits_final_ascites.json       # Split JSON file
 │   ├── splits_final_atherosclerosis.json
 │   ├── splits_final_colorectal_cancer.json
 │   ├── splits_final_lymphadenopathy.json
-│   ├── make_split_json.py              # 核心处理脚本
-│   ├── make_split_json.ipynb           # Jupyter Notebook 版本
-│   ├── process_diseases.sh             # 批量处理脚本
-│   └── output/                         # 处理结果
+│   ├── make_split_json.py              # Core processing script
+│   ├── make_split_json.ipynb           # Jupyter Notebook version
+│   ├── process_diseases.sh             # Batch processing script
+│   └── output/                         # Processing results
 │       ├── ascites/
 │       ├── atherosclerosis/
 │       ├── colorectal_cancer/
 │       └── lymphadenopathy/
 ```
 
-## 🎯 功能
+## 🎯 Features
 
-此工具用于：
-1. 从 split JSON 文件生成标准格式的训练/验证/测试数据集配置
-2. 建立缓存文件夹与样本 ID 的映射关系（manifest.csv）
-3. 支持智能 ID 提取和多级匹配策略
-4. 批量处理多个疾病的数据集
+This tool is used to:
+1. Generate standard-format train/valid/test dataset configurations from split JSON files
+2. Build a mapping between cache folders and sample IDs (manifest.csv)
+3. Support intelligent ID extraction and a multi-level matching strategy
+4. Batch-process datasets for multiple diseases
 
-## 🚀 快速使用
+## 🚀 Quick Usage
 
-### 方式 1：处理单个疾病
+### Method 1: Process a single disease
 
 ```bash
 cd /home/baidu/scratch/Pillar_Eval/rate-evals/split_jsons
 
-# 处理 ascites 数据集
+# Process the ascites dataset
 python make_split_json.py --split-json splits_final_ascites.json
 
-# 或指定输出目录
+# Or specify the output directory
 python make_split_json.py \
   --split-json splits_final_colorectal_cancer.json \
   --output-dir output/colorectal_cancer
 ```
 
-### 方式 2：批量处理所有疾病
+### Method 2: Batch process all diseases
 
 ```bash
 cd /home/baidu/scratch/Pillar_Eval/rate-evals/split_jsons
 bash process_diseases.sh
 ```
 
-这将处理所有 4 个疾病，输出到相应的 `output/` 子目录。
+This processes all 4 diseases, writing results to the corresponding `output/` subdirectory.
 
-## 📋 可用的疾病
+## 📋 Available Diseases
 
-| 编号 | 疾病名 | 英文 | Split 文件 | 数据量 |
-|------|--------|------|-----------|--------|
-| 1 | 腹水 | ascites | split_jsons/splits_final_ascites.json | 1175 |
-| 2 | 动脉硬化 | atherosclerosis | split_jsons/splits_final_atherosclerosis.json | 1159 |
-| 3 | 结直肠癌 | colorectal_cancer | split_jsons/splits_final_colorectal_cancer.json | 1159 |
-| 4 | 淋巴结病 | lymphadenopathy | split_jsons/splits_final_lymphadenopathy.json | 1179 |
+| # | Disease | Split file | Data size |
+|---|---------|-----------|-----------|
+| 1 | ascites | split_jsons/splits_final_ascites.json | 1175 |
+| 2 | atherosclerosis | split_jsons/splits_final_atherosclerosis.json | 1159 |
+| 3 | colorectal_cancer | split_jsons/splits_final_colorectal_cancer.json | 1159 |
+| 4 | lymphadenopathy | split_jsons/splits_final_lymphadenopathy.json | 1179 |
 
-## 📖 详细文档
+## 📖 Detailed Documentation
 
-- **USAGE.md** - 命令行参数详解和使用示例
-- **ORGANIZATION.md** - 目录结构和重组总结
-- **PROCESSING_SUMMARY.md** - 处理过程和技术细节
+- **USAGE.md** - Detailed command-line arguments and examples
+- **ORGANIZATION.md** - Directory structure and reorganization summary
+- **PROCESSING_SUMMARY.md** - Processing details and technical notes
 
-## 🔧 命令行参数
+## 🔧 Command-line Arguments
 
 ### make_split_json.py
 
 ```
-选项：
-  --split-json SPLIT_JSON      Split JSON 文件路径（必需）
-  --nii-root NII_ROOT          NII 影像文件夹路径（可选，默认为标准路径）
-  --cache-root CACHE_ROOT      缓存数据根目录（可选，默认为标准路径）
-  --output-dir OUTPUT_DIR      输出目录（可选，默认为 output/）
-  -v, --verbose                启用详细输出
+Options:
+  --split-json SPLIT_JSON      Split JSON file path (required)
+  --nii-root NII_ROOT          NII image folder path (optional, defaults to standard path)
+  --cache-root CACHE_ROOT      Cache data root directory (optional, defaults to standard path)
+  --output-dir OUTPUT_DIR      Output directory (optional, defaults to output/)
+  -v, --verbose                Enable verbose output
 
-示例：
-  # 最简单的用法（使用所有默认值）
+Examples:
+  # Simplest usage (with all defaults)
   python make_split_json.py --split-json split_jsons/splits_final_ascites.json
 
-  # 启用详细输出
+  # Enable verbose output
   python make_split_json.py --split-json split_jsons/splits_final_ascites.json --verbose
 
-  # 自定义输出目录
+  # Custom output directory
   python make_split_json.py \
     --split-json split_jsons/splits_final_ascites.json \
     --output-dir /tmp/my_output
 ```
 
-## 📊 输出文件说明
+## 📊 Output File Descriptions
 
-每个疾病目录下包含 4 个文件：
+Each disease directory contains 4 files:
 
 ### 1. train.json
-- **格式**: JSONL（每行一个 JSON 对象）
-- **内容**: 训练集样本配置
-- **例子**:
+- **Format**: JSONL (one JSON object per line)
+- **Contents**: Training sample configuration
+- **Example**:
 ```json
 {"sample_name": "amos_0001", "nii_path": "/path/to/amos_0001.nii.gz", "report_metadata": {}}
 ```
 
 ### 2. valid.json
-- **格式**: JSONL
-- **内容**: 验证集样本配置
-- **行数**: 取决于 split.json 中的 val 样本数
+- **Format**: JSONL
+- **Contents**: Validation sample configuration
+- **Row count**: Depends on the number of val samples in split.json
 
 ### 3. test.json
-- **格式**: JSONL
-- **内容**: 测试集样本配置（与 valid.json 相同）
+- **Format**: JSONL
+- **Contents**: Test sample configuration (same as valid.json)
 
 ### 4. manifest.csv
-- **格式**: CSV（2 列）
-- **列**: sample_name, image_cache_path
-- **用途**: 映射样本 ID 到缓存文件夹
-- **例子**:
+- **Format**: CSV (2 columns)
+- **Columns**: sample_name, image_cache_path
+- **Purpose**: Maps sample IDs to cache folders
+- **Example**:
 ```csv
 sample_name,image_cache_path
 amos_0001,/home/baidu/scratch/Pillar_Eval/RAVE_preprocessed/abdomen_disease_classify/amos_0001.1.0
 amos_0004,/home/baidu/scratch/Pillar_Eval/RAVE_preprocessed/abdomen_disease_classify/amos_0004.1.0
 ```
 
-## 🔍 技术细节
+## 🔍 Technical Details
 
-### ID 提取机制
+### ID Extraction Mechanism
 
-**问题背景**：
-- split.json 中的样本路径格式：`Dataset012_FLARE25_abdomen_disease_classify_Tr/.../amos_0001/ses-DEFAULT/amos_0001`
-- 缓存文件夹格式：`amos_0001.1.0`
-- 这两种格式的 ID 需要建立映射关系
+**Background**:
+- Sample path format in split.json: `Dataset012_FLARE25_abdomen_disease_classify_Tr/.../amos_0001/ses-DEFAULT/amos_0001`
+- Cache folder format: `amos_0001.1.0`
+- These two formats need to be mapped to each other
 
-**解决方案**：
-1. **路径解析**: 使用正则表达式 `(amos_\d+)` 从复杂路径中提取标准 ID
-2. **多级匹配**:
-   - 第 1 级：完全匹配
-   - 第 2 级：后缀去除匹配（`amos_0001.1.0` → `amos_0001`）
-   - 第 3 级：正则提取匹配
-   - 第 4 级：前缀匹配（处理特殊格式）
+**Solution**:
+1. **Path parsing**: Use the regular expression `(amos_\d+)` to extract the standard ID from the complex path
+2. **Multi-level matching**:
+   - Level 1: Exact match
+   - Level 2: Suffix-stripped match (`amos_0001.1.0` → `amos_0001`)
+   - Level 3: Regex extraction match
+   - Level 4: Prefix match (handles special formats)
 
-### 误差处理
+### Error Handling
 
-- **未匹配的文件夹**: 统计报告但不中断处理
-- **详细日志**: 使用 `--verbose` 查看完整匹配信息
-- **错误恢复**: 部分文件夹未匹配不影响总体处理
+- **Unmatched folders**: Counted and reported without aborting
+- **Detailed logs**: Use `--verbose` to see full match information
+- **Error recovery**: Unmatched folders do not affect overall processing
 
-## 💡 使用建议
+## 💡 Usage Tips
 
-### 工作流程
+### Workflow
 
-1. **检查输入**：确保 split_jsons/ 包含所需的 split JSON 文件
-2. **处理数据**：运行 `python make_split_json.py` 或 `bash process_diseases.sh`
-3. **验证结果**：检查 output/ 目录下的文件是否完整
-4. **下游处理**：使用 manifest.csv 和 JSON 文件进行后续操作
+1. **Check inputs**: Make sure `split_jsons/` contains the required split JSON files
+2. **Run processing**: Run `python make_split_json.py` or `bash process_diseases.sh`
+3. **Verify results**: Check that files under `output/` are complete
+4. **Downstream processing**: Use manifest.csv and the JSON files for subsequent operations
 
-### 性能优化
+### Performance
 
-- **单个处理**: 处理速度 < 1 秒
-- **批量处理**: 4 个疾病 < 10 秒
-- **输出大小**: 每个疾病约 300K
+- **Single disease**: Processing time < 1 second
+- **Batch processing**: 4 diseases < 10 seconds
+- **Output size**: ~300K per disease
 
-### 扩展应用
+### Extending
 
-可以轻松扩展处理其他疾病：
-1. 将新疾病的 split JSON 放入 `split_jsons/`
-2. 更新 `process_diseases.sh` 的 DISEASES 数组
-3. 运行脚本自动生成输出
+It's easy to add more diseases:
+1. Drop the new disease's split JSON into `split_jsons/`
+2. Update the `DISEASES` array in `process_diseases.sh`
+3. Run the script to generate outputs automatically
 
-## 🐛 故障排除
+## 🐛 Troubleshooting
 
-### Q1: 文件未找到错误
+### Q1: File not found error
 ```
-❌ 找不到 Split 文件: /path/to/split.json
+❌ Split file not found: /path/to/split.json
 ```
-**解决**: 检查文件路径是否正确，split JSON 文件是否在 split_jsons/ 目录中
+**Fix**: Check whether the file path is correct and that the split JSON file is in the `split_jsons/` directory
 
-### Q2: 缓存目录不存在
+### Q2: Cache directory does not exist
 ```
-❌ 缓存目录不存在: /path/to/cache
+❌ Cache directory does not exist: /path/to/cache
 ```
-**解决**: 确认 CACHE_ROOT_DIR 路径正确，检查目录是否存在
+**Fix**: Confirm the `CACHE_ROOT_DIR` path is correct and that the directory exists
 
-### Q3: 权限错误
+### Q3: Permission error
 ```
 Permission denied
 ```
-**解决**: 检查对 output/ 目录的写入权限
+**Fix**: Check write permissions on the `output/` directory
 
-### Q4: 匹配率低
+### Q4: Low match rate
 ```
-⚠️ 未匹配文件夹: 500 个
+⚠️ Unmatched folders: 500
 ```
-**解决**: 
-- 这通常是正常的（未匹配的文件夹可能不属于该疾病）
-- 使用 `--verbose` 查看详细信息
-- 检查 split.json 和缓存文件的 ID 格式
+**Fix**:
+- This is usually normal (unmatched folders may not belong to the disease)
+- Use `--verbose` to see detailed information
+- Check the ID format in split.json and the cache files
 
-## 📝 依赖项
+## 📝 Dependencies
 
 - Python 3.6+
-- pandas（用于处理 CSV 和 DataFrame）
-- 标准库：json, os, re, argparse
+- pandas (for CSV and DataFrame handling)
+- Standard library: json, os, re, argparse
 
-## 🔄 版本历史
+## 🔄 Version History
 
 ### v1.2 (2025-12-09)
-- ✨ 完整目录整合：脚本和输出都放入 split_jsons/ 目录
-- ✨ 恢复 split JSON 为简单 ID 格式
-- ✨ 简化了路径和使用方式
+- ✨ Full directory consolidation: scripts and outputs both placed under split_jsons/
+- ✨ Restored split JSON files to the simple ID format
+- ✨ Simplified paths and usage
 
 ### v1.1 (2025-12-09)
-- ✨ 重新组织目录结构
-- ✨ 改进 ID 提取和匹配逻辑
-- ✨ 添加详细文档
+- ✨ Reorganized directory structure
+- ✨ Improved ID extraction and matching logic
+- ✨ Added detailed documentation
 
 ### v1.0 (2025-12-09)
-- 初始版本：基础数据集处理功能
+- Initial release: basic dataset processing functionality
 
-## 📞 支持
+## 📞 Support
 
-如有问题，请检查：
-1. USAGE.md - 详细使用说明
-2. ORGANIZATION.md - 目录结构说明
-3. PROCESSING_SUMMARY.md - 处理过程详情
+If you run into issues, please consult:
+1. USAGE.md - Detailed usage instructions
+2. ORGANIZATION.md - Directory structure description
+3. PROCESSING_SUMMARY.md - Processing details
 
-## 📄 许可证
+## 📄 License
 
 See LICENSE file for details.

@@ -46,7 +46,7 @@ mkdir -p "$OUTPUT_BASE_DIR"
 
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${BLUE}║                                                                                ║${NC}"
-echo -e "${BLUE}║              🔧 开始提取11个疾病的Embedding特征                               ║${NC}"
+echo -e "${BLUE}║              🔧 Starting embedding extraction for 11 diseases                 ║${NC}"
 echo -e "${BLUE}║                                                                                ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════════════════════════╝${NC}"
 echo ""
@@ -61,15 +61,15 @@ for disease in "${DISEASES[@]}"; do
   OUTPUT_DIR="$OUTPUT_BASE_DIR/$disease"
   
   echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-  echo -e "${GREEN}[${CURRENT}/${DISEASE_COUNT}]${NC} 正在处理疾病: ${YELLOW}${disease}${NC}"
+  echo -e "${GREEN}[${CURRENT}/${DISEASE_COUNT}]${NC} Processing disease: ${YELLOW}${disease}${NC}"
   echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-  echo "📁 输出目录: $OUTPUT_DIR"
+  echo "📁 Output directory: $OUTPUT_DIR"
   echo ""
   
   mkdir -p "$OUTPUT_DIR"
   
   # Run the embedding extraction command
-  echo -e "${BLUE}执行命令:${NC}"
+  echo -e "${BLUE}Executing command:${NC}"
   echo "uv run rate-extract \\"
   echo "  --model pillar0 \\"
   echo "  --dataset amos_${disease} \\"
@@ -96,9 +96,9 @@ for disease in "${DISEASES[@]}"; do
     --modality ${MODALITY}
   
   if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✅ ${disease} embedding 提取成功!${NC}"
+    echo -e "${GREEN}✅ ${disease} embedding extraction succeeded!${NC}"
   else
-    echo -e "${RED}❌ ${disease} embedding 提取失败!${NC}"
+    echo -e "${RED}❌ ${disease} embedding extraction failed!${NC}"
   fi
   
   echo ""
@@ -106,11 +106,11 @@ done
 
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${BLUE}║                                                                                ║${NC}"
-echo -e "${BLUE}║                    ✅ 所有疾病的 embedding 提取完成！                         ║${NC}"
+echo -e "${BLUE}║                    ✅ Embedding extraction complete for all diseases!         ║${NC}"
 echo -e "${BLUE}║                                                                                ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════════════════════════╝${NC}"
 echo ""
-echo -e "${GREEN}📊 生成的 embedding 目录结构:${NC}"
+echo -e "${GREEN}📊 Generated embedding directory structure:${NC}"
 echo "embeddings/"
 for disease in "${DISEASES[@]}"; do
   echo "├── ${disease}/"

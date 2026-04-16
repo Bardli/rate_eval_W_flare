@@ -1,10 +1,10 @@
-# 项目目录重组完成总结
+# Project Directory Reorganization Summary
 
-## 🎯 重组内容
+## 🎯 Reorganization Overview
 
-成功将所有数据处理文件重新组织到合理的目录结构中。
+Successfully reorganized all data-processing files into a clean directory structure.
 
-### 原始结构
+### Original Structure
 ```
 rate-evals/
 ├── make_split_json.py
@@ -19,19 +19,19 @@ rate-evals/
 └── lymphadenopathy/
 ```
 
-### 最终结构
+### Final Structure
 
 ```
 rate-evals/
-└── split_jsons/                    📁 统一目录：输入、脚本、输出
+└── split_jsons/                    📁 Unified directory: inputs, scripts, outputs
     ├── splits_final_ascites.json
     ├── splits_final_atherosclerosis.json
     ├── splits_final_colorectal_cancer.json
     ├── splits_final_lymphadenopathy.json
-    ├── make_split_json.py          ✅ 脚本与 split JSON 同目录
+    ├── make_split_json.py          ✅ Script lives alongside the split JSON files
     ├── make_split_json.ipynb
-    ├── process_diseases.sh         ✅ 脚本与 split JSON 同目录
-    └── output/                     📁 输出处理结果
+    ├── process_diseases.sh         ✅ Script lives alongside the split JSON files
+    └── output/                     📁 Processing results
         ├── ascites/
         │   ├── train.json
         │   ├── valid.json
@@ -42,101 +42,101 @@ rate-evals/
         └── lymphadenopathy/
 ```
 
-## 📝 代码更新
+## 📝 Code Updates
 
 ### make_split_json.py
 
-**脚本现已与 split JSON 文件位于同一目录**
+**The script now lives in the same directory as the split JSON files**
 ```
 split_jsons/
 ├── splits_final_ascites.json
-├── make_split_json.py  ← 可直接在此目录运行
+├── make_split_json.py  ← Can be run directly from this directory
 └── output/
 ```
 
 ### process_diseases.sh
 
-**脚本现已与 split JSON 文件位于同一目录**
+**The script now lives in the same directory as the split JSON files**
 ```
 split_jsons/
 ├── splits_final_ascites.json
-├── process_diseases.sh ← 可直接在此目录运行
+├── process_diseases.sh ← Can be run directly from this directory
 └── output/
 ```
 
-## 📊 文件统计
+## 📊 File Statistics
 
-### Split JSON 文件
-- **位置**: `split_jsons/`
-- **文件数**: 4 个
-- **总大小**: 80K
+### Split JSON files
+- **Location**: `split_jsons/`
+- **Count**: 4
+- **Total size**: 80K
 
-### 脚本文件
-- **位置**: `split_jsons/`
-- **文件数**: 2 个（make_split_json.py, process_diseases.sh）
+### Script files
+- **Location**: `split_jsons/`
+- **Count**: 2 (make_split_json.py, process_diseases.sh)
 
-### 输出文件
-- **位置**: `split_jsons/output/`
-- **子目录**: 4 个（每个疾病一个）
-- **总大小**: 1.2M
+### Output files
+- **Location**: `split_jsons/output/`
+- **Subdirectories**: 4 (one per disease)
+- **Total size**: 1.2M
 
-## ✅ 验证完毕
+## ✅ Verification Complete
 
-- [x] Split JSON 文件已复制到 `split_jsons/`
-- [x] 处理结果已移动到 `output/` 子目录
-- [x] make_split_json.py 路径配置已更新
-- [x] process_diseases.sh 路径配置已更新
-- [x] 脚本功能测试通过 ✓
-- [x] 新增 USAGE.md 使用文档
+- [x] Split JSON files copied to `split_jsons/`
+- [x] Processing results moved into `output/` subdirectories
+- [x] make_split_json.py path configuration updated
+- [x] process_diseases.sh path configuration updated
+- [x] Script functional tests passed ✓
+- [x] Added USAGE.md documentation
 
-## 🚀 快速使用
+## 🚀 Quick Usage
 
-### 方式 1：单个疾病处理
+### Method 1: Single disease processing
 ```bash
 cd /home/baidu/scratch/Pillar_Eval/rate-evals
 python make_split_json.py --split-json split_jsons/splits_final_ascites.json
-# 输出到 output/ascites/
+# Output goes to output/ascites/
 ```
 
-### 方式 2：批量处理所有疾病
+### Method 2: Batch processing of all diseases
 ```bash
 cd /home/baidu/scratch/Pillar_Eval/rate-evals
 bash process_diseases.sh
-# 输出到 output/{ascites,atherosclerosis,colorectal_cancer,lymphadenopathy}/
+# Output goes to output/{ascites,atherosclerosis,colorectal_cancer,lymphadenopathy}/
 ```
 
-### 方式 3：自定义输出目录
+### Method 3: Custom output directory
 ```bash
 python make_split_json.py \
   --split-json split_jsons/splits_final_colorectal_cancer.json \
   --output-dir /path/to/custom/output
 ```
 
-## 📚 相关文档
+## 📚 Related Documentation
 
-- `USAGE.md` - 详细使用文档和命令参考
-- `PROCESSING_SUMMARY.md` - 处理过程总结和技术细节
-- `README.md` - 项目总览
+- `USAGE.md` - Detailed usage documentation and command reference
+- `PROCESSING_SUMMARY.md` - Processing summary and technical details
+- `README.md` - Project overview
 
-## 优势
+## Advantages
 
-✨ **高度集成的项目结构**
-- 输入（split JSON）、脚本、输出全部集中在 `split_jsons/` 目录
-- 使用相对路径，一体化管理
+✨ **Highly integrated project structure**
+- Inputs (split JSON), scripts, and outputs are all consolidated under `split_jsons/`
+- Uses relative paths for unified management
 
-✨ **简化的使用方式**
-- 进入 `split_jsons/` 目录后可直接运行脚本
-- 无需指定复杂的相对或绝对路径
-- 代码更简洁易维护
+✨ **Simplified usage**
+- Scripts can be run directly after entering the `split_jsons/` directory
+- No need to specify complex relative or absolute paths
+- Code is cleaner and easier to maintain
 
-✨ **方便的扩展性**
-- 添加新疾病只需将 split JSON 放入 `split_jsons/`
-- 自动生成相应的输出目录
+✨ **Easy extensibility**
+- Adding a new disease only requires dropping its split JSON into `split_jsons/`
+- The corresponding output directory is generated automatically
 
-## 下一步
+## Next Steps
 
-可选：
-1. 添加到 git 版本控制（split_jsons 和 output 目录）
-2. 创建 requirements.txt 以管理依赖
-3. 添加单元测试验证处理结果
-4. 编写数据加载工具来读取处理后的 JSON 和 CSV
+Optional:
+1. Add to git version control (split_jsons and output directories)
+2. Create requirements.txt to manage dependencies
+3. Add unit tests to verify processing results
+4. Write data-loading utilities to consume the processed JSON and CSV files
