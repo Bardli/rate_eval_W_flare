@@ -20,6 +20,52 @@ datasets:
   abd_ct_merlin_for_ctclip_model:
     class: MerlinAbdCTForCTCLIPModel
     config: configs/dataset/abd_ct_merlin_for_ctclip_model.yaml
+# Dataset adds here  
+  amos_ascites:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_ascites.yaml
+  amos_atherosclerosis:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_atherosclerosis.yaml
+  amos_colorectal_cancer:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_colorectal_cancer.yaml
+  amos_lymphadenopathy:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_lymphadenopathy.yaml
+  amos_adrenal_hyperplasia:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_adrenal_hyperplasia.yaml
+  amos_cholecystitis:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_cholecystitis.yaml
+  amos_fatty_liver:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_fatty_liver.yaml
+  amos_gallstone:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_gallstone.yaml
+  amos_hydronephrosis:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_hydronephrosis.yaml
+  amos_kidney_stone:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_kidney_stone.yaml
+  amos_liver_calcifications:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_liver_calcifications.yaml
+  amos_liver_cyst:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_liver_cyst.yaml
+  amos_liver_lesion:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_liver_lesion.yaml
+  amos_renal_cyst:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_renal_cyst.yaml
+  amos_splenomegaly:
+    class: MerlinAbdCT
+    config: configs/dataset/amos_splenomegaly.yaml
 
 # Global configuration overrides
 # These settings apply globally and can override defaults from base, model, and dataset configs
@@ -69,8 +115,8 @@ evaluation:
 
   # Weights & Biases integration
   use_wandb: true
-  wandb_entity: yala-lab
-  wandb_project: rate-eval
+  wandb_entity:
+  wandb_project: rate-evals
   exp_name: null           # If null, will be generated dynamically
 
   # Additional evaluation settings
